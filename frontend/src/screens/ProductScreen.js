@@ -10,7 +10,7 @@ import Message from "../components/Message";
 const ProductScreen = ({ match }) => {
   const dispatch = useDispatch();
 
-  const productDetails = useSelector((state) => state.ProductDetails);
+  const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
   useEffect(() => {
