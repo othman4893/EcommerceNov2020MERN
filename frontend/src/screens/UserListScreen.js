@@ -1,36 +1,36 @@
-import React, { useEffect } from 'react';
-import { LinkContainer } from 'react-router-bootstrap';
-import { Button, Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
-import Loader from '../components/Loader';
-import { listUsers, deleteUser } from '../actions/userActions';
+import React, { useEffect } from 'react'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import Message from '../components/Message'
+import Loader from '../components/Loader'
+import { listUsers, deleteUser } from '../actions/userActions'
 
 const UserListScreen = ({ history }) => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
-  const userList = useSelector((state) => state.userList);
-  const { loading, error, users } = userList;
+  const userList = useSelector((state) => state.userList)
+  const { loading, error, users } = userList
 
-  const userLogin = useSelector((state) => state.userLogin);
-  const { userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
 
-  const userDelete = useSelector((state) => state.userDelete);
-  const { success: successDelete } = userDelete;
+  const userDelete = useSelector((state) => state.userDelete)
+  const { success: successDelete } = userDelete
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
-      dispatch(listUsers());
+      dispatch(listUsers())
     } else {
-      history.push('/login');
+      history.push('/login')
     }
-  }, [dispatch, history, successDelete, userInfo]);
+  }, [dispatch, history, successDelete, userInfo])
 
   const deleteHandler = (id) => {
-    if (window.confirm('Are you sure?')) {
-      dispatch(deleteUser(id));
+    if (window.confirm('Are you sure')) {
+      dispatch(deleteUser(id))
     }
-  };
+  }
 
   return (
     <>
@@ -50,7 +50,6 @@ const UserListScreen = ({ history }) => {
               <th></th>
             </tr>
           </thead>
-
           <tbody>
             {users.map((user) => (
               <tr key={user._id}>
@@ -69,7 +68,7 @@ const UserListScreen = ({ history }) => {
                 <td>
                   <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
-                      <i className='fas fa-edit'></i> Edit
+                      <i className='fas fa-edit'></i>
                     </Button>
                   </LinkContainer>
                   <Button
@@ -77,7 +76,7 @@ const UserListScreen = ({ history }) => {
                     className='btn-sm'
                     onClick={() => deleteHandler(user._id)}
                   >
-                    <i className='fas fa-trash'></i>{' '}
+                    <i className='fas fa-trash'></i>
                   </Button>
                 </td>
               </tr>
@@ -86,7 +85,7 @@ const UserListScreen = ({ history }) => {
         </Table>
       )}
     </>
-  );
-};
+  )
+}
 
-export default UserListScreen;
+export default UserListScreen
